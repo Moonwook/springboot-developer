@@ -44,8 +44,8 @@ public class TokenProvider {
     public boolean validToken(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(jwtProperties.getSecretKey())
-                    .parseClaimsJws(token);
+                .setSigningKey(jwtProperties.getSecretKey())
+                .parseClaimsJws(token);
 
             return true;
         } catch (Exception e) {
@@ -58,8 +58,11 @@ public class TokenProvider {
         Claims claims = getClaims(token);
         Set<SimpleGrantedAuthority> authorities = Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 
-        return new UsernamePasswordAuthenticationToken(new org.springframework.security.core.userdetails.User(claims.getSubject
-                (), "", authorities), token, authorities);
+        return new UsernamePasswordAuthenticationToken(
+                new org.springframework.security.core.userdetails.User(claims.getSubject(), "", authorities),
+                token,
+                authorities
+        );
     }
 
     public Long getUserId(String token) {

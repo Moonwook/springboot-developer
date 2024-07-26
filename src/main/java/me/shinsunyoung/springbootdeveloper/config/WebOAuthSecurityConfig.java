@@ -63,16 +63,21 @@ public class WebOAuthSecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/api/token")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
                         .anyRequest().permitAll())
+                // *** OAuth2 로그인 설정시작 ***
                 .oauth2Login(oauth2 -> oauth2
+                        //로그인이 필요한 경우 사용자를 보낼 URL을 지정
                         .loginPage("/login")
-                        // Authorization 요청과 관련된 상태 저장
+                        // Authorization 요청과 관련된 상태 저장 설정
                         .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint
                                 .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository()))
-                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint.userService(oAuth2UserCustomService))
-                        // ***인증성공시 실행할 핸들러
+                        //OAuth 로그인 시 사용자 정보를 가져오는 엔드포인트와 사용자 서비스를 설정
+                        .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
+                                // userInfoEndpoint()로 가져온 사용자 정보를 이용해서 oAuth2UserCustomService개체로 사후처리함
+                                .userService(oAuth2UserCustomService))
+                        // ***인증성공시 실행할 핸들러 설정
                         .successHandler(oAuth2SuccessHandler())
                 )
-                // /api로 시작하는 url인 경우 401 상태 코드를 반환하도록 예외 처리
+                // '/api'로 시작하는 url인 경우 401 상태 코드를 반환하도록 예외 처리
                 .exceptionHandling(exceptionHandling -> exceptionHandling
                         .defaultAuthenticationEntryPointFor(
                                 new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
