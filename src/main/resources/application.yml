@@ -1,22 +1,9 @@
 spring:
   profiles:
-    include: secret #민감한 정보들
+#    include: secret #민감한 정보들
     active: dev   #사용할 환경설정
 
 
-##application-secret.yml 예시
-#spring:
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: ...
-#            client-secret: ...
-#            scope:
-#              - email
-#              - profile
-#
 ##application-prod.yml 예시
 #spring:
 #  config:
@@ -38,6 +25,16 @@ spring:
 #    url: jdbc:mysql://{ip or domain}:3306/blog?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
 #    username: ...
 #    password: ...
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ...
+#            client-secret: ...
+#            scope:
+#              - email
+#              - profile
 #jwt:
 #  issuer: xxx@aa.bb
 #  secret_key: xxxxx
