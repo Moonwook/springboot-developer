@@ -30,7 +30,7 @@ create table article (
     primary key(id)
 );
 
-create table refresh_token (
+create table refreshtoken (
     id bigint not null AUTO_INCREMENT,
     refresh_token varchar(255) not null,
     user_id bigint not null,
@@ -74,7 +74,7 @@ create table users (
           <driver-library value="" />
           <driver value="" />
           <url-type value="DATABASE" />
-          <host value="awseb-e-k3qvxavbrh-stack-awsebrdsdatabase-xtrktd1xcues.cx0caiu6edwf.ap-northeast-2.rds.amazonaws.com" />
+          <host value="awseb-e-dmycv3qxgx-stack-awsebrdsdatabase-cqxiajcyfome.cbweeq8wct3q.ap-northeast-2.rds.amazonaws.com" />
           <port value="3306" />
           <database value="mysql" />
           <tns-folder value="" />
